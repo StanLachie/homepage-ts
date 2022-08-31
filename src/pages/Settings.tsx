@@ -14,7 +14,7 @@ function Settings() {
     { value: "blue", label: "Blue" },
     { value: "purple", label: "Purple" },
   ];
-  const [name, setName] = useState(localStorage.getItem("hpUsername"));
+  const [name, setName] = useState(localStorage.getItem("hpUsername") || "user");
   const [color, setColor] = useState(
     localStorage.getItem("hpUserColor") || "{ value: 'blue', label: 'Blue' }"
   );
