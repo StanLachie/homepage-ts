@@ -3,6 +3,7 @@ import { BsPlusCircleDotted } from "react-icons/bs";
 
 interface AppInstallerProps {
   registerApp: Function;
+  darkMode: boolean;
 }
 
 const AppInstaller: FC<AppInstallerProps> = (props) => {
@@ -17,13 +18,20 @@ const AppInstaller: FC<AppInstallerProps> = (props) => {
     }
   };
 
+  // ("flex justify-center items-center w-28 h-28 mx-2 bg-white rounded-xl shadow-lg cursor-pointer");
+
   return (
     <div
-      className="flex justify-center items-center w-28 h-28 mx-2 bg-white rounded-xl shadow-lg cursor-pointer"
+      className={`flex justify-center items-center w-28 h-28 mx-2 ${
+        props.darkMode ? "bg-zinc-900" : "bg-white"
+      } rounded-xl shadow-lg cursor-pointer select-none`}
       title={`Add New App`}
       onClick={() => handleAppInstall()}
     >
-      <BsPlusCircleDotted size={48} />
+      <BsPlusCircleDotted
+        className={props.darkMode ? "text-gray-100" : "text-gray-900"}
+        size={48}
+      />
     </div>
   );
 };
