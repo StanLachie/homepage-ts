@@ -1,12 +1,14 @@
 import cx from "classnames";
 import React, { FC, useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsMoonStars, BsMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   name?: string;
   settings?: boolean;
+  darkMode: boolean;
+  toggleDark: Function;
 }
 
 const Navbar: FC<NavbarProps> = (props) => {
@@ -29,9 +31,13 @@ const Navbar: FC<NavbarProps> = (props) => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center p-2 bg-white border-b-2">
+    <div
+      className={`flex justify-between items-center p-2 ${
+        props.darkMode ? "bg-zinc-900 border-zinc-800" : "bg-white"
+      } border-b-2`}
+    >
       <div className="flex justify-between items-center text-3xl font-semibold ">
-        <p>
+        <p className={`${props.darkMode ? "text-gray-100" : "text-gray-900"}`}>
           {!props.settings ? "Welcome home, " : "Homepage "}
           <span
             className={cx(
@@ -48,16 +54,37 @@ const Navbar: FC<NavbarProps> = (props) => {
           </span>
         </p>
       </div>
-      <div className="select-none">
+      <div className="flex select-none">
+        {props.darkMode ? (
+          <BsMoonStarsFill
+            className={`mr-4 ${
+              props.darkMode ? "text-white" : "text-black"
+            } cursor-pointer`}
+            size={28}
+            onClick={() => props.toggleDark()}
+          />
+        ) : (
+          <BsMoonStars
+            className={`mr-4 ${
+              props.darkMode ? "text-white" : "text-black"
+            } cursor-pointer`}
+            size={28}
+            onClick={() => props.toggleDark()}
+          />
+        )}
         {props.settings ? (
           <AiFillHome
-            className="cursor-pointer"
+            className={`${
+              props.darkMode ? "text-white" : "text-black"
+            } cursor-pointer`}
             size={28}
             onClick={() => navigate("/")}
           />
         ) : (
           <BsPersonCircle
-            className="cursor-pointer"
+            className={`${
+              props.darkMode ? "text-white" : "text-black"
+            } cursor-pointer`}
             size={28}
             onClick={() => navigate("/settings")}
           />

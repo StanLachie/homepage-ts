@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -8,7 +8,11 @@ import {
 import AppButton from "./AppButton";
 import AppInstaller from "./AppInstaller";
 
-const AppSlider = () => {
+interface AppSliderProps {
+  darkMode: boolean;
+}
+
+const AppSlider: FC<AppSliderProps> = (props) => {
   const installedApps = localStorage.getItem("hpInstalledApps");
   const [editMode, setEditMode] = useState(false);
   const [userApps, setUserApps] = useState<
@@ -70,7 +74,11 @@ const AppSlider = () => {
   return (
     <div className="flex justify-center items-center">
       <div className="w-3/4 m-12">
-        <div className="flex justify-between mb-2">
+        <div
+          className={`flex justify-between mb-2 ${
+            props.darkMode ? "text-gray-100" : "text-gray-900"
+          }`}
+        >
           <div className="text-lg font-semibold">Your Apps:</div>
           <div className="flex text-lg font-semibold">
             Edit Mode:{" "}
@@ -108,6 +116,7 @@ const AppSlider = () => {
                             editMode={editMode}
                             updater={updateApp}
                             uninstaller={uninstallApp}
+                            darkMode={props.darkMode}
                           />
                         </div>
                       )}
@@ -118,7 +127,7 @@ const AppSlider = () => {
               )}
             </Droppable>
           </DragDropContext>
-          <AppInstaller registerApp={installApp} />
+          <AppInstaller registerApp={installApp} darkMode={props.darkMode} />
         </div>
       </div>
     </div>
