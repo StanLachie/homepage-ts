@@ -9,3 +9,4 @@ A simple brower homepage to streamline web usage.
 - Search w/ Google
 - Custom Apps
 - User Customizability Settings
+- Dark Mode Toggle
